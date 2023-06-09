@@ -31,22 +31,17 @@ class DB
             die('could not connect to DB');
         }
     }
-
-    public function query($sql, $data =array(),$opt=null)
+    
+    public function query($sql, $data = array(), $opt = null)
     {
         $req  = $this->db->prepare($sql);
-        if ($opt=='insert' ||  $opt=='update' || $opt=='delete') {
+        if ($opt == 'insert' ||  $opt == 'update' || $opt == 'delete') {
+            // this return a value (true or false | 1 or 0)
             return  $req->execute($data);
-
-        }else {
+        } else {
             $req->execute($data);
+            // this returns an array containing an abject of the fetch
             return $req->fetchALL(PDO::FETCH_OBJ);
-    
         }
     }
-
-
-
-    
 }
-// PDO::FETCH_OBJ

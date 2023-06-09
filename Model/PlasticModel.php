@@ -1,14 +1,18 @@
-<?php /**
+<?php
+
+/**
  *
  */
-class WasteModel
+class PlasticModel
 {
-  private $DB;
+    private $DB;
 
-  function __construct($BD)
-  {
-      $this->DB = $BD;
-  }
+    function __construct($BD)
+    {
+        $this->DB = $BD;
+    }
+
+
 
 
 }
