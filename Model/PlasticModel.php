@@ -1,7 +1,7 @@
 <?php /**
  *
  */
-class CategoryModel
+class WasteModel
 {
   private $DB;
 
