@@ -1,75 +1,80 @@
-<<<<<<< HEAD
-<?php /**
-=======
 <?php
 
 /**
->>>>>>> 91cb66210f0901ebd8ee0f895edd2bc84e480068
  *
  */
 class UserModel
 {
-<<<<<<< HEAD
-  private $DB;
-
-  function __construct($BD)
-  {
-      $this->DB = $BD;
-  }
-
-
-}
-
-?>
-=======
     private $DB;
 
-    function __construct($BD)
+    public function __construct($DB)
     {
-        $this->DB = $BD;
+        $this->DB = $DB;
     }
-  
+
+    public function updateUser($id, $name, $phone_number, $password, $city, $qwater, $gender, $frequency, $upd_date)
+    {
+        $data = [
+            'name' => $name,
+            'phone_number' => $phone_number,
+            'password' => $password,
+            'city' => $city,
+            'qwater' => $qwater,
+            'gender' => $gender,
+            'frequency' => $frequency,
+            'upd_date' => $upd_date,
+            'id' => $id
+        ];
+
+        $stmt = $this->DB->query("UPDATE user SET name=:name, phone_number=:phone_number, password=:password, city=:city, qwater=:qwater, gender=:gender, frequency=:frequency, upd_date=:upd_date WHERE id=:id", $data, 'update');
+
+        return $stmt;
+    }
 
     public function getUsers()
     {
         $rows = $this->DB->query("SELECT * FROM user");
         if ($rows) {
             $output = '';
-            // creating table of data for household
+            // Creating table of data for users
             foreach ($rows as $key => $row) {
                 $output .=
                     '<tr>
-            <td>' . ($key + 1) . '</td>
-            <td>' . $row->name . '</td>
-               <td>' . $row->phone_number . '</td>
-               <td>' . $row->city . '</td>
-               <td> ' . $row->qwater . '</td>
-               <td>' . $row->gender . '</td>
-               <td> ' . $row->frequency . '</td>
-               <td> ' . $row->crt_date . '</td>
-            </tr>';
+                    <td>' . ($key + 1) . '</td>
+                    <td>' . $row->name . '</td>
+                    <td>' . $row->phone_number . '</td>
+                    <td>' . $row->city . '</td>
+                    <td>' . $row->qwater . '</td>
+                    <td>' . $row->gender . '</td>
+                    <td>' . $row->frequency . '</td>
+                    <td>' . $row->crt_date . '</td>
+                </tr>';
             }
             return $output;
         } else {
-            return $output = "empty Table";
+            return "empty Table";
         }
     }
 
-    public function deleteUser(int $id): int
+    public function findUserByPlasticType($plasticType)
     {
-        // checking if data to delete exist
-        $rows = $this->DB->query("SELECT * FROM `user` WHERE `id`=?", [$id]);
-        if (count($rows) > 0) {
-            // if data is available we proceed to delete
-            $stmt = $this->DB->query("DELETE FROM user WHERE id=?", [$id], 'delete');
-            if ($stmt) {
-                // we retun 1 if successfull delete
-                return 1;
-            }
-        } elseif (count($rows) == 0) {
-            // if data is available we proceed to delete
-            return 2;
-        }
+        $result = $this->DB->query("SELECT * FROM user WHERE id IN (SELECT DISTINCT user_id FROM plastic WHERE category_id = ?)", [$plasticType]);
+        return $result;
+    }
+
+    public function findUserByQWater($qwater)
+    {
+        $query = "SELECT * FROM user WHERE qwater = ?";
+        $result = $this->DB->query($query, [$qwater]);
+        return $result;
+    }
+
+    public function findUserByCity($city)
+    {
+        $query = "SELECT * FROM user WHERE city = ?";
+        $result = $this->DB->query($query, [$city]);
+        return $result;
     }
 }
->>>>>>> 91cb66210f0901ebd8ee0f895edd2bc84e480068
+
+?>
