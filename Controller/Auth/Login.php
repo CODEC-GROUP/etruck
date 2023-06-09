@@ -1,6 +1,6 @@
 <?php
-require_once '../Model/db/db.class.php';
-require_once '../Model/user.php';
+require_once '../../Model/db/db.class.php';
+require_once '../../Model/user.php';
 $response = array();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $DB = new DB();

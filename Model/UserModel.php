@@ -1,27 +1,10 @@
-<<<<<<< HEAD
-<?php /**
-=======
-<?php
 
-/**
->>>>>>> 91cb66210f0901ebd8ee0f895edd2bc84e480068
+<?php /**
+
  *
  */
 class UserModel
 {
-<<<<<<< HEAD
-  private $DB;
-
-  function __construct($BD)
-  {
-      $this->DB = $BD;
-  }
-
-
-}
-
-?>
-=======
     private $DB;
 
     function __construct($BD)
@@ -72,4 +55,3 @@ class UserModel
         }
     }
 }
->>>>>>> 91cb66210f0901ebd8ee0f895edd2bc84e480068
