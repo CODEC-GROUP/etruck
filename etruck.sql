@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 09, 2023 at 02:42 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 8.0.19
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jun 09, 2023 at 02:33 PM
+-- Server version: 8.0.31
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,12 +27,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `category`
 --
 
-CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `crt_date` text NOT NULL,
-  `upd_date` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `upd_date` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -40,45 +42,34 @@ CREATE TABLE `category` (
 -- Table structure for table `company`
 --
 
-CREATE TABLE `company` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `company`;
+CREATE TABLE IF NOT EXISTS `company` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `phone_number` text NOT NULL,
   `password` text NOT NULL,
-  `c_password` text NOT NULL,
   `city` text NOT NULL,
   `qwater` text NOT NULL,
   `frequency` text NOT NULL,
   `crt_date` text NOT NULL,
-  `upd_date` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `upd_date` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `household`
+-- Table structure for table `plastic`
 --
 
-CREATE TABLE `household` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `phone_number` text NOT NULL,
-  `password` text NOT NULL,
-  `c_password` text NOT NULL,
-  `city` text NOT NULL,
-  `qwater` text NOT NULL,
-  `gender` text NOT NULL,
-  `frequency` text NOT NULL,
-  `crt_date` text NOT NULL,
-  `upd_date` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `household`
---
-
-INSERT INTO `household` (`id`, `name`, `phone_number`, `password`, `c_password`, `city`, `qwater`, `gender`, `frequency`, `crt_date`, `upd_date`) VALUES
-(1, 'eta cyril', '651898704', '1234', '1234', 'Douala', 'pk17', 'male', '2\r\n', '', '');
+DROP TABLE IF EXISTS `plastic`;
+CREATE TABLE IF NOT EXISTS `plastic` (
+  `waste_id` int NOT NULL AUTO_INCREMENT,
+  `waste_type` varchar(255) NOT NULL,
+  `waste_owner` varchar(255) NOT NULL,
+  `waste_truck` varchar(255) NOT NULL,
+  PRIMARY KEY (`waste_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -86,63 +77,47 @@ INSERT INTO `household` (`id`, `name`, `phone_number`, `password`, `c_password`,
 -- Table structure for table `truckman`
 --
 
-CREATE TABLE `truckman` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `truckman`;
+CREATE TABLE IF NOT EXISTS `truckman` (
+  `id` int NOT NULL,
   `name` text NOT NULL,
   `phone_number` text NOT NULL,
   `password` text NOT NULL,
-  `c_password` text NOT NULL,
   `city` text NOT NULL,
   `qwater` text NOT NULL,
   `gender` text NOT NULL,
   `frequency` text NOT NULL,
   `crt_date` text NOT NULL,
   `upd_date` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
 
 --
--- Indexes for dumped tables
+-- Table structure for table `user`
 --
 
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `phone_number` text NOT NULL,
+  `password` text NOT NULL,
+  `city` text NOT NULL,
+  `qwater` text NOT NULL,
+  `gender` text NOT NULL,
+  `frequency` text NOT NULL,
+  `crt_date` text NOT NULL,
+  `upd_date` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
 --
--- Indexes for table `company`
---
-ALTER TABLE `company`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `household`
---
-ALTER TABLE `household`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- Dumping data for table `user`
 --
 
---
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `company`
---
-ALTER TABLE `company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `household`
---
-ALTER TABLE `household`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+INSERT INTO `user` (`id`, `name`, `phone_number`, `password`, `city`, `qwater`, `gender`, `frequency`, `crt_date`, `upd_date`) VALUES
+(1, 'eta cyril', '651898704', '1234', 'Douala', 'pk17', 'male', '2\r\n', '', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
